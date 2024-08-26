@@ -13,7 +13,7 @@ namespace Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // TODO: deberia cambiarlo por una base de datos local mejor, sqlite?
+            //IDEA: deberia cambiarlo por una base de datos local mejor, sqlite?
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=afip_auto;Trusted_Connection=True;TrustServerCertificate=True;");

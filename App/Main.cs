@@ -6,7 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace App
 {
-    //TODO: + desde 1 PDF de una factura que genere una nota de credito con los datos de esa factura, seria para anular esa factura!, solo necesitaria del PDF, nada mas
+    //IDEA: + desde 1 PDF de una factura que genere una nota de credito con los datos de esa factura, seria para anular esa factura!, solo necesitaria del PDF, nada mas
     public partial class Main : Form
     {
         private AFIPAutomation automation;
@@ -173,10 +173,14 @@ namespace App
         {
             try
             {
-                await _clientRepository.AddClientAsync(client);
+                string resultMessage = await _clientRepository.AddClientAsync(client);
 
-                MessageBox.Show("Cliente agregado a la base de datos exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                await LoadClientsAsync();
+                MessageBox.Show(resultMessage, "Resultado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (resultMessage == "Cliente agregado a la base de datos exitosamente.")
+                {
+                    await LoadClientsAsync();
+                }
             }
             catch (Exception ex)
             {
@@ -187,6 +191,7 @@ namespace App
                 CloseAlertForm();
             }
         }
+
 
 
         private void CloseButton_Click(object sender, EventArgs e)

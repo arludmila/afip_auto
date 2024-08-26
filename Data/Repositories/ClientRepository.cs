@@ -12,7 +12,7 @@ namespace Data.Repositories
         {
             _context = context;
         }
-        public async Task AddClientAsync(Client client)
+        public async Task<string> AddClientAsync(Client client)
         {
             var existingClient = await _context.Clients
                 .Where(c => c.CUIT == client.CUIT && c.PhoneNumber == client.PhoneNumber)
@@ -20,13 +20,16 @@ namespace Data.Repositories
 
             if (existingClient != null)
             {
-                //TODO: revisar aca si avisar o hacer algo al ya tener agregado ese cliente.
-                //throw new InvalidOperationException("A client with the same CUIT and PhoneNumber already exists.");
+               
+                return "El cliente ya existe en la base de datos.";
             }
 
             _context.Clients.Add(client);
             await _context.SaveChangesAsync();
+
+            return "Cliente agregado a la base de datos exitosamente.";
         }
+
         public async Task<List<Client>> GetAllClientsAsync()
         {
             return await _context.Clients.OrderBy(c => c.Name).ToListAsync();
