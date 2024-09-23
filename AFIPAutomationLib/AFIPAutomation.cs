@@ -117,17 +117,17 @@ namespace AFIPAutomationLib
             select.SelectByValue("2");
 
             // Handle optional "No mostrar" checkbox
-            try
+            /*try
             {
                 IWebElement doNotShowInput = wait.Until(d => d.FindElement(By.Id("novolveramostrar")));
                 doNotShowInput.Click();
             }
-            catch (NoSuchElementException) { }
+            catch (NoSuchElementException) { }*/
 
             // Select the receipt type
-            IWebElement typeSelect = wait.Until(d => d.FindElement(By.Id("universocomprobante")));
+            /*IWebElement typeSelect = wait.Until(d => d.FindElement(By.Id("universocomprobante")));
             select = new SelectElement(typeSelect);
-            select.SelectByValue("2");
+            select.SelectByValue("2");*/
 
             // Continue to the next step
             IWebElement continueButton = wait.Until(d => d.FindElement(By.XPath("//*[@id='contenido']/form/input[2]")));

@@ -14,9 +14,9 @@ namespace Data.Migrations
                 name: "Clients",
                 columns: table => new
                 {
-                    CUIT = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    CUIT = table.Column<string>(type: "TEXT", maxLength: 11, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
+                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {

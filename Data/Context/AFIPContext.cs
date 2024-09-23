@@ -13,10 +13,20 @@ namespace Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //IDEA: deberia cambiarlo por una base de datos local mejor, sqlite?
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=.\\SQLEXPRESS;Database=afip_auto;Trusted_Connection=True;TrustServerCertificate=True;");
+
+                var folder = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+
+                var appSubfolder = System.IO.Path.Combine(folder, "AFIP Auto");
+                if (!System.IO.Directory.Exists(appSubfolder))
+                {
+                    System.IO.Directory.CreateDirectory(appSubfolder);
+                }
+
+                var dbPath = System.IO.Path.Combine(appSubfolder, "afip_auto.db");
+
+                optionsBuilder.UseSqlite($"Data Source={dbPath}");
             }
         }
 
@@ -25,7 +35,7 @@ namespace Data.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Client>()
-                .HasKey(c => new { c.CUIT, c.PhoneNumber }); 
+                .HasKey(c => new { c.CUIT, c.PhoneNumber });
 
             modelBuilder.Entity<Client>()
                 .Property(c => c.CUIT)
